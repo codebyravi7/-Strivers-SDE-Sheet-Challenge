@@ -1,0 +1,59 @@
+class Solution {
+public:
+
+void swap(int i, int j, vector<int> &nums)
+{
+    int t = nums[i];
+    nums[i] = nums[j];
+    nums[j] = t;
+}
+void reversalOfarray(int n,vector<int>& nums){
+    for(int i=0;i<n/2;i++){
+        int t = nums[i];
+        nums[i] = nums[n-i-1];
+        nums[n-i-1] = t;
+    }
+}
+
+void reverse(int index, int n, vector<int> &nums)
+{
+    int mid = n + index;
+    int last = n - 1;
+    for (int i = index; i < (mid) / 2; i++)
+    {
+        int t = nums[i];
+        nums[i] = nums[last];
+        nums[last] = t;
+        last--;
+    }
+}
+void nextPermutation(std::vector<int>& nums)
+{
+    int n = nums.size();
+    bool flag = false;
+    int index1 = -1, index2 = -1;
+
+    for (int i = n - 2; i >= 0; i--) {
+        if (nums[i] < nums[i + 1]) {
+            index1 = i;
+            flag = true;
+            break;
+        }
+    }
+
+    if (flag) {
+        for (int i = n - 1; i > index1; i--) {
+            if (nums[index1] < nums[i]) {
+                index2 = i;
+                break;
+            }
+        }
+        swap(index1, index2, nums);
+        reverse(index1 + 1, n, nums);
+    }
+     else {
+        reversalOfarray(n, nums);
+    }
+}
+
+};
