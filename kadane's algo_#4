@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+
+        int left =0;
+        int right =0;
+        int sum =0;
+        int maxSum =0;
+        for(int i=0;i<nums.size();i++){
+         if(sum <=0){
+         left =right;
+         sum =0;
+         }
+         
+         sum+=nums[right++];
+         maxSum =max(sum,maxSum);
+        }
+        int maxEl =INT_MIN;
+        if(maxSum ==0)
+        {
+            for(int i=0;i<nums.size();i++)
+            maxEl= max(maxEl,nums[i]);
+
+            return maxEl;
+        }
+        return maxSum;
+        
+    }
+};
