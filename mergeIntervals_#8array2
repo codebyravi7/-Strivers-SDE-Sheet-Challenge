@@ -1,0 +1,40 @@
+class Solution {
+public:
+ 
+ 
+ 
+     static bool sortcol(const vector<int>& v1, const vector<int>& v2)
+       {
+         return v1[0] < v2[0];
+      }
+
+    vector<vector<int>> merge(vector<vector<int>>& in) {
+
+        sort(in.begin(), in.end(), sortcol);
+        int sz =in.size();
+        vector<vector<int>> ans;
+        int st =in[0][0];
+        int end =in[0][1];
+
+        for(int i=0;i<sz;i++){
+              if(in[i][0]<=end){
+                    end =max(end,in[i][1]);
+                }
+                else{
+                    vector<int> v;
+                    v.push_back(st);
+                    v.push_back(end);
+                    ans.push_back(v);
+                    st =in[i][0];
+                    end =in[i][1];
+                }
+        }
+        vector<int> v;
+        v.push_back(st);
+        v.push_back(end);
+        ans.push_back(v);
+        return ans;
+
+
+    }
+};
