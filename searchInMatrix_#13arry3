@@ -1,0 +1,59 @@
+class Solution {
+public:
+    bool searchCol(vector<vector<int>>& matrix, int target,int row){
+
+        int low =0;
+        int high =matrix[0].size()-1;
+        int mid =0;
+
+        while(low<=high){
+            mid =low+high;
+            mid/=2;
+            if(matrix[row][mid] == target)
+            return true;
+
+            else if(matrix[row][mid] < target)
+            low =mid+1;
+
+            else
+            high =mid-1;
+        }
+        return false;
+
+    }
+    int searchRow(vector<vector<int>>& matrix, int target){
+        int low =0;
+        int high =matrix.size()-1;
+        int mid =0;
+
+        while(mid<=high){
+            mid =low+high;
+            mid/=2;
+            if(low == mid){
+                if (mid + 1 == high)
+            {
+                if (matrix[mid][matrix[0].size()-1] < target)
+                    return mid+1;
+            }
+            return mid;
+            }
+
+            if(matrix[mid][0] == target)
+            return INT_MIN;
+
+            else if(matrix[mid][0] < target)
+            low =mid;
+
+            else
+            high =mid;
+        }
+        return mid;
+    }
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int row = searchRow(matrix,target);
+        if(row == INT_MIN)
+        return true;
+
+        return searchCol(matrix,target,row);
+    }
+};
