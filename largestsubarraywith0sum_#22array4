@@ -1,0 +1,40 @@
+class Solution {
+public:
+//RECURSIVE SOLUTION
+    // int solve(int n,unordered_map<int,int> m,vector<bool> &v){
+    //     if(m.find(n) == m.end()|| v[m[n]]== true)
+    //     return 0;
+        
+    //     int left =0,right =0;
+    //     if(v[m[n]] ==false){
+    //     v[m[n]]= true;
+    //     left =solve(n-1,m,v);
+    //     right =solve(n+1,m,v);
+    //     }
+    //     return 1+left+right;
+
+    // }
+    int longestConsecutive(vector<int>& nums) {
+        int n =nums.size();
+        if(n==0)return 0;
+
+        unordered_set<int> st;
+        for(int i =0;i<n;i++){
+            st.insert(nums[i]);
+        }
+        
+        int ans =1;
+        for(auto i:st){
+                int cnt =1;
+                int x =i;
+            if(st.find(x-1) == st.end()){
+                while(st.find(x+1) != st.end()){
+                    x++;
+                    cnt++;
+                }
+            }
+            ans = max(ans,cnt);
+        }
+        return ans;
+    }
+};
