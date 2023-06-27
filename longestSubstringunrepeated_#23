@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        // if(s ==" ") return 1;
+        int maxlen=0;
+        int st =0;
+        unordered_map<int,int> mp;
+        for(int i=0;i<s.length();i++){
+            if(mp.find(s[i])!=mp.end()){
+                st =max(st,mp[s[i]]+1);
+            }
+                maxlen =max(maxlen,i+1-st);
+                mp[s[i]] =i;
+        }
+        return maxlen;
+    }
+};
+
+//declare reqd variables
+/*
+1.Iterate into the string using for loop
+2.if value or character is already present then update initial. and also its value in map.
+3. if the character is not present push it in to the map as(character,index)
+4. upadate maxlen in each iteration.
+*/
