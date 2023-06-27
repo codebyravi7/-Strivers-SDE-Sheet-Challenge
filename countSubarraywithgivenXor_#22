@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+
+int subarraysXor(vector<int> &arr, int k)
+{
+    //    Write your code here.
+    int preXor =0;
+    map<int,int> mp;
+    mp[preXor]++;//(0,1) initially key 0 mapped to freq 1;
+    int cnt =0;
+    for(int i=0;i<arr.size();i++){
+        preXor =preXor^arr[i];
+
+        int x = preXor ^ k;
+        if(mp.find(x) != mp.end())//no need to check this condition but why??
+        cnt+=mp[x];
+
+        mp[preXor]++;
+    }
+    return cnt;
+}
