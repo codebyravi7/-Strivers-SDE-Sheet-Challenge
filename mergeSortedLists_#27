@@ -1,0 +1,78 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode* h1=list1;
+        ListNode* h2=list2;
+        ListNode* head=NULL;
+        ListNode* cur=NULL;
+        while(h1 && h2){
+            if(head==NULL){
+
+            if(h1->val <h2->val){
+            ListNode* newnode =new ListNode(h1->val);
+            head =newnode;
+            cur =newnode;
+            h1=h1->next;
+            }
+            else{
+            ListNode* newnode =new ListNode(h2->val);
+            head =newnode;
+            cur =newnode;
+            h2=h2->next;
+            }
+
+            }
+            else{
+
+            if(h1->val <h2->val){
+            ListNode* newnode =new ListNode(h1->val);
+            cur->next =newnode;
+            cur =newnode;
+            h1=h1->next;
+            }
+            else{
+            ListNode* newnode =new ListNode(h2->val);
+            cur->next =newnode;
+            cur =newnode;
+            h2=h2->next;
+            }
+            }
+        }
+        while(h1){
+            ListNode* newnode =new ListNode(h1->val);
+            if(head==NULL){
+            head =newnode;
+            cur =newnode;
+            }
+            else{
+            cur->next =newnode;
+            cur =newnode;
+            }
+            h1=h1->next;
+        }
+        while(h2){
+            ListNode* newnode =new ListNode(h2->val);
+            if(head==NULL){
+            head =newnode;
+            cur =newnode;
+            }
+            else{
+            cur->next =newnode;//what is the error here
+            cur =newnode;
+            }
+            h2=h2->next;
+        }
+
+        return head;
+    }
+};
