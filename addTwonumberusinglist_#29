@@ -1,0 +1,60 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* cur1 =l1;
+        ListNode* cur2 =l2;
+        ListNode* head =NULL;
+        ListNode* cur =NULL;
+
+        int carry =0;
+
+
+        while(cur1 || cur2){
+                ListNode* newnode =new ListNode();
+                // newnode->next =NULL;
+            if(cur1 && cur2){
+                newnode->val =(cur1->val+cur2->val+carry)%10;
+                carry =(cur1->val+cur2->val+carry)/10;
+                cur2 =cur2->next;
+                cur1 =cur1->next;
+            }
+            else if(cur1 ==NULL && cur2 !=NULL){
+                newnode->val =(cur2->val+carry)%10;
+                carry =(cur2->val+carry)/10;
+                cur2 =cur2->next;
+            }
+            else{
+                newnode->val =(cur1->val+carry)%10;
+                carry =(cur1->val+carry)/10;
+                cur1 =cur1->next;
+            }
+            if(head==NULL){
+                head=newnode;
+                cur=newnode;
+            }
+            else{
+                cur->next =newnode;
+                cur=newnode;
+            }
+                
+        }
+        if(carry!=0){
+            ListNode* newnode =new ListNode();
+                newnode->next =NULL;
+                newnode->val =carry;
+                cur->next=newnode;
+                cur=newnode;                
+        }
+        return head;
+    }
+};
