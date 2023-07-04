@@ -1,0 +1,35 @@
+    Node* mergelist(Node* p1, Node* p2){
+	 Node* temp =new Node(0);
+	 Node* res =temp;
+	 while(p1 && p2){
+	     if(p1->data <p2->data){
+	         temp->bottom =p1;
+	         temp=temp->bottom;
+	         p1 =p1->bottom;
+	     }
+	     else{
+	         temp->bottom =p2;
+	         temp=temp->bottom;
+	         p2 =p2->bottom;
+	     }
+	 }
+	 if(p1)temp->bottom =p1;
+	 else temp->bottom =p2;
+	 return res->bottom;
+}
+Node *flatten(Node *root)
+{
+    // No need to merge
+   if(root ==nullptr || root->next == nullptr)
+	return root;
+   
+   //recur for the list on right
+   root->next =flatten(root->next);
+   
+   //now merge
+   root =mergelist(root,root->next);
+   
+//   return root
+// it will be merged with its left
+   return root;
+   }
